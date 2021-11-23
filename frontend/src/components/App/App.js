@@ -6,7 +6,8 @@ import { MessageList } from '../MessageList/MessageList';
 import s from './App.module.css'
 
 const MESSAGE_EVENT = "chat message";
-const SERVER_URL = 'http://localhost:5555'
+// const SERVER_URL = 'http://localhost:5555'
+const SERVER_URL = '/'
 
 function App() {
   const [messages, setMessages] = useState([]);
