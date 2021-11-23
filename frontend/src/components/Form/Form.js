@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import s from './Form.module.css'
 
 export const Form = ({ onSubmit }) => {
   const [userName, setUserName] = useState('');
   const [userMessage, setUserMessage] = useState('');
+  const [isInputShown, setIsInputShown] = useState(true)
 
   const onInputChange = e => {
     const { name, value } = e.currentTarget;
@@ -23,10 +25,15 @@ export const Form = ({ onSubmit }) => {
     e.preventDefault();
     onSubmit(userName, userMessage);
     setUserMessage('');
+    setIsInputShown(false)
   };
 
   return (
-    <form onSubmit={onSubmitForm} id={'form'}>
+    <form onSubmit={onSubmitForm} id={'form'} className={s.form}>
+      {
+        isInputShown &&
+
+
       <label>
         <input
           type="text"
@@ -34,9 +41,11 @@ export const Form = ({ onSubmit }) => {
           value={userName}
           onChange={onInputChange}
           required={true}
-          placeholder={'Имя'}
+            placeholder={'Имя'}
+            className={s.input}
         ></input>
       </label>
+      }
       {userName && (
         <>
           <label>
@@ -47,39 +56,12 @@ export const Form = ({ onSubmit }) => {
               onChange={onInputChange}
               required={true}
               placeholder={'Сообщение'}
+              className={s.input}
             ></input>
           </label>
-          <button type="submit">Отправить</button>
+          <button type="submit" className={s.button}>Отправить</button>
         </>
       )}
-
-      {/* {
-                userName
-                ? (< label >
-                Введите имя
-                <input
-                type='text'
-                    name='userName'
-                    value={userName}
-                    onChange={onInputChange}
-                ></input>
-                    </label>)
-                    :
-                    (
-
-            <label>
-                Текст сообщения
-                <input
-                    type='text'
-                    name='userMessage'
-                    value={userMessage}
-                    onChange={onInputChange}
-
-                ></input>
-            </label>
-                    )
-            } */}
-      {/* <button type="submit">Отправить</button> */}
     </form>
   );
 };

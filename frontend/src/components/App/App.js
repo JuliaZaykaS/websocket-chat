@@ -1,9 +1,9 @@
 import socketIOClient from "socket.io-client"
 import { useState, useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid'
 import { Form } from '../Form/Form'
 
 import { MessageList } from '../MessageList/MessageList';
+import s from './App.module.css'
 
 const MESSAGE_EVENT = "chat message";
 const SERVER_URL = 'http://localhost:5555'
@@ -11,6 +11,7 @@ const SERVER_URL = 'http://localhost:5555'
 function App() {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef();
+  let styles
 
   useEffect(() => {
 
@@ -35,10 +36,16 @@ function App() {
 
 
   const sendMessage = (messageBody) => {
+    console.log(messageBody);
     socketRef.current.emit(MESSAGE_EVENT, {
       ...messageBody,
       senderId: socketRef.current.id,
     });
+
+    // if (senderId === socketRef.current.id) {
+    //   styles = 'item-owner'
+    // }
+    // styles = 'item-another'
   };
 
   const onSubmit = (userName, userMessage) => {
@@ -49,11 +56,13 @@ function App() {
     sendMessage(newMessage);
   }
 
+  // const styles
+
     return (
-      <>
-        <MessageList data={messages} />
+      <div className={s.section}>
+        <MessageList data={messages} styles={styles} />
         <Form onSubmit={onSubmit} />
-      </>
+      </div>
     );
 
   }
