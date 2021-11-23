@@ -2,9 +2,10 @@ const express = require('express');
 require('dotenv').config()
 const path = require('path')
 
-const react = path.join(__dirname, '../', 'frontend', 'build' );
+// const react = path.join(__dirname, '../', 'frontend', 'build' );
+const react = path.join(__dirname, 'frontend', 'build' );
 // console.log(__dirname);
-// console.log(react);
+console.log(react);
 
 const PORT = process.env.PORT || 5000;
 const app = express();
