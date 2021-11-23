@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const Form = ({onSubmit}) => {
+export const Form = ({ onSubmit }) => {
   const [userName, setUserName] = useState('');
   const [userMessage, setUserMessage] = useState('');
 
@@ -20,34 +20,38 @@ export const Form = ({onSubmit}) => {
   };
 
   const onSubmitForm = e => {
-      e.preventDefault();
-      onSubmit(userName,userMessage)
+    e.preventDefault();
+    onSubmit(userName, userMessage);
     setUserMessage('');
   };
 
   return (
     <form onSubmit={onSubmitForm} id={'form'}>
       <label>
-        Введите имя
         <input
           type="text"
           name="userName"
           value={userName}
           onChange={onInputChange}
           required={true}
+          placeholder={'Имя'}
         ></input>
       </label>
-
-      <label>
-        Текст сообщения
-        <input
-          type="text"
-          name="userMessage"
-          value={userMessage}
-          onChange={onInputChange}
-          required={true}
-        ></input>
-      </label>
+      {userName && (
+        <>
+          <label>
+            <input
+              type="text"
+              name="userMessage"
+              value={userMessage}
+              onChange={onInputChange}
+              required={true}
+              placeholder={'Сообщение'}
+            ></input>
+          </label>
+          <button type="submit">Отправить</button>
+        </>
+      )}
 
       {/* {
                 userName
@@ -75,7 +79,7 @@ export const Form = ({onSubmit}) => {
             </label>
                     )
             } */}
-      <button type="submit">Отправить</button>
+      {/* <button type="submit">Отправить</button> */}
     </form>
   );
 };
